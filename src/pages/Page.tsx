@@ -7,6 +7,7 @@ import Nav from "../components/NavBar/Nav";
 const StyledContainer = styled(Container)`
     padding-top: 5em;
     padding-bottom: 5em;
+    overflow-y: auto;
 `;
 
 interface IProps{

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import LoginStore from '../../redux/Login';
+import Page from '../Page';
 
 const LogoutPage = () => {
 
@@ -11,9 +13,11 @@ const LogoutPage = () => {
     },[]);
 
     return(
-        <div>
+        <Page> 
+        <Container>
             You Have been Successfully Logged out
-        </div>
+        </Container>
+        </Page> 
     )
 }
 
