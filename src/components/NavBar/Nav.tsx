@@ -12,6 +12,7 @@ import orders from '../../assets/orders.png';
 import reporting from '../../assets/reporting.png';
 import settings from '../../assets/settings.png';
 import admin from '../../assets/admin.png';
+import { IRootState } from '../../interfaces/redux/Login';
 
 const StyledMenu = styled(Menu)`
     border: none !important;
@@ -48,28 +49,33 @@ const Nav = () => {
         exact: true
     });
 
-    const matchTrackedFlights = useRouteMatch({
-        path:'/tracked-flights'
+    const matchLogin = useRouteMatch({
+        path: '/login'
     });
 
-   
+    const matchLogout = useRouteMatch({
+        path: '/logout'
+    });
 
-    return(
+
+    const login = useSelector((state: IRootState) => state.login.successMessage)
+console.log(login)
+    return (
         <StyledMenu fixed="top" stackable>
             <Container>
                 <Menu.Item>
                     <Image src={logo} size='mini' />
                 </Menu.Item>
-                <Menu.Item 
+                <Menu.Item
                     as={Link}
                     name="HOME"
                     to={routes.HOME}
                     active={!!matchHome}
                 >
-                     <Icon name='home' />
+                    <Icon name='home' />
                     Home
                 </Menu.Item>
-               
+
                 <Menu.Item>
                     <Image src={products} size='mini' />
                     Products
@@ -83,7 +89,7 @@ const Nav = () => {
                     Reporting
                 </Menu.Item>
                 <Menu.Item>
-                <Icon name='setting' />
+                    <Icon name='setting' />
                     Settings
                 </Menu.Item>
                 <Menu.Item>
@@ -91,16 +97,29 @@ const Nav = () => {
                     Admin
                 </Menu.Item>
                 <Menu.Menu position='right'>
-                <Menu.Item 
-                    float="right"
-                    as={Link}
-                    name="Trackedlist"
-                    to={routes.LOGIN}
-                    active={!!matchTrackedFlights}
-                >
-                    <Icon name='user outline' />
-                   Login
-                </Menu.Item>
+                    {!login.successMessage ? (
+                        <Menu.Item
+                            float="right"
+                            as={Link}
+                            name="Trackedlist"
+                            to={routes.LOGIN}
+                            active={!!matchLogin}
+                        >
+                            <Icon name='user outline' />
+                            Login
+                        </Menu.Item>
+                    ) : (
+                        <Menu.Item
+                            float="right"
+                            as={Link}
+                            name="Trackedlist"
+                            to={routes.LOGOUT}
+                            active={!!matchLogout}
+                        >
+                            <Icon name='user outline' />
+                            Logout
+                        </Menu.Item>
+                    )}
                 </Menu.Menu>
             </Container>
         </StyledMenu>
